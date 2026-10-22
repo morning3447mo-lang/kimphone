@@ -1,0 +1,2210 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display',
+    'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+  color: #1c1c1e;
+  background: #e9ebef;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(0, 122, 255, 0.45);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.stage {
+  width: 100%;
+  min-height: 100vh;
+  padding: 26px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+      ellipse at 18% 12%,
+      rgba(255, 255, 255, 0.95),
+      transparent 38%
+    ),
+    linear-gradient(145deg, #e9edf2, #d9dee6);
+}
+
+.phone {
+  position: relative;
+  width: min(393px, calc(100vw - 24px));
+  height: min(852px, calc(100vh - 32px));
+  min-height: 620px;
+  border: 7px solid #171719;
+  border-radius: 56px;
+  background: #111;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6),
+    0 28px 70px rgba(20, 25, 35, 0.28), 0 8px 18px rgba(20, 25, 35, 0.15);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.wallpaper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 48px;
+  background-image: linear-gradient(
+      180deg,
+      rgba(7, 17, 31, 0.1),
+      rgba(7, 17, 31, 0.02) 45%,
+      rgba(7, 17, 31, 0.12)
+    ),
+    url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1200&q=85');
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+}
+
+.wallpaper::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: '';
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.13) 0%,
+    transparent 28%,
+    transparent 70%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+}
+
+.status-bar {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 54px;
+  padding: 13px 24px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.2px;
+}
+
+.island {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 120px;
+  height: 35px;
+  transform: translateX(-50%);
+  border-radius: 24px;
+  background: #050505;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035);
+}
+
+.island-camera {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  width: 13px;
+  height: 13px;
+  border: 2px solid #151b25;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #263f5b, #06090d 68%);
+}
+
+.status-icons {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 48px;
+  height: 18px;
+}
+
+.status-icons svg {
+  display: block;
+}
+
+.home-date-block {
+  position: absolute;
+  top: 88px;
+  left: 28px;
+  z-index: 1;
+  color: #fff;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.12);
+}
+
+.home-weekday {
+  margin: 0 0 1px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+}
+
+.home-date-block h1 {
+  margin: 0;
+  font-size: 50px;
+  font-weight: 300;
+  letter-spacing: -2.2px;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+.app-grid {
+  position: absolute;
+  top: 205px;
+  left: 18px;
+  right: 18px;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 9px;
+  row-gap: 21px;
+}
+
+.app-item {
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  background: transparent;
+  cursor: pointer;
+}
+
+.app-icon {
+  position: relative;
+  width: 57px;
+  height: 57px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16),
+    inset 0 0 0 0.6px rgba(255, 255, 255, 0.28);
+  transition: transform 140ms ease, filter 140ms ease;
+}
+
+.app-item:active .app-icon,
+.dock-icon:active .app-icon {
+  transform: scale(0.91);
+  filter: brightness(0.95);
+}
+
+.app-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.app-icon-messages {
+  background: linear-gradient(145deg, #66e985, #18bd50);
+}
+
+.app-icon-moments {
+  background: linear-gradient(145deg, #a7d889, #66ad4c);
+}
+
+.app-icon-photos {
+  background: #fff;
+}
+
+.app-icon-music {
+  background: linear-gradient(145deg, #ff6480, #e92350);
+}
+
+.app-icon-calendar {
+  background: #fff;
+}
+
+.app-icon-notes {
+  background: linear-gradient(145deg, #fffef9, #f1edda);
+}
+
+.app-icon-safari {
+  background: linear-gradient(145deg, #65d8ff, #087bfa);
+}
+
+.app-icon-settings {
+  background: linear-gradient(145deg, #d5d9de, #858b95);
+}
+
+.app-name {
+  max-width: 76px;
+  overflow: hidden;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+}
+
+.home-widget {
+  position: absolute;
+  right: 19px;
+  bottom: 151px;
+  left: 19px;
+  z-index: 1;
+  min-height: 116px;
+  padding: 14px 16px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 22px;
+  color: #fff;
+  background: rgba(28, 35, 45, 0.26);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.09);
+  -webkit-backdrop-filter: blur(22px) saturate(135%);
+  backdrop-filter: blur(22px) saturate(135%);
+}
+
+.widget-topline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.widget-main {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: 0.1px;
+}
+
+.widget-divider {
+  height: 1px;
+  margin: 10px 0 8px;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.widget-note {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 12px;
+}
+
+.dock {
+  position: absolute;
+  right: 13px;
+  bottom: 34px;
+  left: 13px;
+  z-index: 2;
+  min-height: 82px;
+  padding: 12px 11px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 28px;
+  background: rgba(246, 247, 249, 0.28);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  -webkit-backdrop-filter: blur(25px) saturate(150%);
+  backdrop-filter: blur(25px) saturate(150%);
+}
+
+.dock-icon {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  cursor: pointer;
+}
+
+.dock-icon .app-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 14px;
+}
+
+.home-indicator {
+  position: absolute;
+  z-index: 6;
+  bottom: 8px;
+  left: 50%;
+  width: 135px;
+  height: 5px;
+  transform: translateX(-50%);
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.app-overlay {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 48px;
+  background: #fff;
+  animation: app-enter 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes app-enter {
+  from {
+    opacity: 0.7;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.app-window {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #f2f2f7;
+}
+
+.system-app-header {
+  min-height: 62px;
+  padding: 12px 16px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  border-bottom: 1px solid rgba(60, 60, 67, 0.12);
+  background: rgba(249, 249, 249, 0.94);
+}
+
+.system-app-header strong {
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.back-button {
+  justify-self: start;
+  padding: 7px 0;
+  border: 0;
+  color: #007aff;
+  background: transparent;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.app-placeholder {
+  height: calc(100% - 62px);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #f2f2f7;
+}
+
+.app-placeholder .app-icon {
+  width: 76px;
+  height: 76px;
+  margin-bottom: 18px;
+  border-radius: 19px;
+}
+
+.app-placeholder h2 {
+  margin: 0 0 8px;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.app-placeholder p {
+  max-width: 250px;
+  margin: 0;
+  color: #77777e;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.return-button {
+  margin-top: 24px;
+  padding: 11px 20px;
+  border: 0;
+  border-radius: 12px;
+  color: #fff;
+  background: #007aff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ------------------------------
+   消息 App 基础样式
+   ------------------------------ */
+
+.messages-app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: #1c1c1e;
+  background: #f2f2f7;
+}
+
+.messages-header {
+  min-height: 74px;
+  padding: 18px 18px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid rgba(60, 60, 67, 0.1);
+  background: rgba(249, 249, 249, 0.96);
+}
+
+.messages-header h1,
+.messages-header h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 750;
+  letter-spacing: -0.7px;
+}
+
+.messages-header button,
+.messages-app button {
+  cursor: pointer;
+}
+
+.chat-list {
+  flex: 1;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.chat-row {
+  width: 100%;
+  min-height: 76px;
+  padding: 10px 16px;
+  border: 0;
+  border-bottom: 1px solid rgba(60, 60, 67, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  color: inherit;
+  background: #fff;
+}
+
+.chat-row:active {
+  background: #e5e5ea;
+}
+
+.chat-row img,
+.chat-avatar {
+  width: 49px;
+  height: 49px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chat-row-content {
+  min-width: 0;
+  flex: 1;
+}
+
+.chat-row-content strong,
+.chat-row-content span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chat-row-content strong {
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.chat-row-content span {
+  color: #8e8e93;
+  font-size: 13px;
+}
+
+.conversation {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #f2f2f7;
+}
+
+.conversation-header {
+  min-height: 58px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(60, 60, 67, 0.12);
+  background: rgba(249, 249, 249, 0.96);
+}
+
+.conversation-header button {
+  border: 0;
+  color: #007aff;
+  background: transparent;
+}
+
+.conversation-messages,
+.message-list {
+  min-height: 0;
+  flex: 1;
+  padding: 16px 13px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.message-bubble {
+  max-width: 78%;
+  padding: 10px 13px;
+  border-radius: 18px;
+  color: #1c1c1e;
+  background: #e5e5ea;
+  font-size: 15px;
+  line-height: 1.42;
+  overflow-wrap: anywhere;
+}
+
+.message-bubble.sent,
+.message-bubble.outgoing,
+.message-bubble.is-mine {
+  align-self: flex-end;
+  border-bottom-right-radius: 6px;
+  color: #fff;
+  background: #34c759;
+}
+
+.message-bubble.received,
+.message-bubble.incoming {
+  align-self: flex-start;
+  border-bottom-left-radius: 6px;
+  background: #fff;
+}
+
+.message-composer {
+  padding: 9px 12px max(12px, env(safe-area-inset-bottom));
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  border-top: 1px solid rgba(60, 60, 67, 0.12);
+  background: #f8f8fa;
+}
+
+.message-composer input,
+.message-composer textarea {
+  min-width: 0;
+  flex: 1;
+  padding: 10px 13px;
+  border: 1px solid #d1d1d6;
+  border-radius: 21px;
+  color: #1c1c1e;
+  background: #fff;
+  outline: none;
+  resize: none;
+}
+
+.message-composer button {
+  width: 37px;
+  height: 37px;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: #007aff;
+  font-weight: 700;
+}
+
+/* ------------------------------
+   iOS 风格照片 App
+   ------------------------------ */
+
+.photo-app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: #1c1c1e;
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display',
+    'Helvetica Neue', Arial, sans-serif;
+}
+
+.photo-status-spacer {
+  height: 48px;
+  flex: 0 0 48px;
+  background: #fff;
+}
+
+.photo-header {
+  z-index: 2;
+  padding: 2px 20px 15px;
+  flex: 0 0 auto;
+  background: #fff;
+}
+
+.photo-header-top {
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.photo-back {
+  padding: 4px 0;
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: #007aff;
+  background: transparent;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.photo-header-action {
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #007aff;
+  background: #f2f2f7;
+  cursor: pointer;
+}
+
+.photo-header-action.is-active {
+  color: #ff375f;
+  background: #fff0f3;
+}
+
+.photo-title-row {
+  margin-top: 10px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.photo-title-row h2 {
+  margin: 0;
+  color: #1c1c1e;
+  font-size: 34px;
+  font-weight: 750;
+  letter-spacing: -1.2px;
+  line-height: 1.12;
+}
+
+.photo-title-row p {
+  margin: 6px 0 0;
+  color: #8e8e93;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.photo-add-round {
+  width: 39px;
+  height: 39px;
+  margin-bottom: 1px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #007aff;
+  background: #f2f2f7;
+  cursor: pointer;
+}
+
+.photo-content {
+  min-height: 0;
+  flex: 1;
+  padding: 0 14px 22px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: #fff;
+}
+
+.photo-library-content {
+  padding-top: 3px;
+  padding-bottom: 20px;
+}
+
+.photo-library-toolbar {
+  margin: 0 5px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #8e8e93;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3px;
+  align-content: start;
+}
+
+.photo-card {
+  min-width: 0;
+  padding: 0 0 9px;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 3px;
+  overflow: hidden;
+  color: #1c1c1e;
+  text-align: left;
+  background: #fff;
+  cursor: pointer;
+}
+
+.photo-thumbnail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1.12;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: #e5e5ea;
+}
+
+.photo-thumbnail img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 180ms ease;
+}
+
+.photo-card:active .photo-thumbnail img {
+  transform: scale(0.97);
+}
+
+.photo-image-fallback {
+  position: absolute;
+  z-index: 0;
+  font-size: 25px;
+}
+
+.photo-card-favorite {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  z-index: 2;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: rgba(30, 30, 30, 0.35);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.photo-card-title {
+  padding: 3px 4px 0;
+  overflow: hidden;
+  color: #2c2c2e;
+  font-size: 11px;
+  font-weight: 550;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.photo-card-date {
+  padding: 0 4px;
+  color: #8e8e93;
+  font-size: 10px;
+}
+
+.photo-tab-bar {
+  min-height: 67px;
+  padding: 7px 22px 10px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 12px;
+  border-top: 1px solid rgba(60, 60, 67, 0.12);
+  background: rgba(250, 250, 252, 0.97);
+}
+
+.photo-tab {
+  min-width: 58px;
+  padding: 2px 7px;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: #8e8e93;
+  background: transparent;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.photo-tab.is-active {
+  color: #007aff;
+}
+
+.photo-tab span {
+  font-size: 10px;
+  font-weight: 550;
+}
+
+.photo-empty {
+  min-height: 270px;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.photo-empty-icon {
+  width: 66px;
+  height: 66px;
+  margin-bottom: 12px;
+  border-radius: 22px;
+  display: grid;
+  place-items: center;
+  color: #8e8e93;
+  background: #f2f2f7;
+}
+
+.photo-empty h3 {
+  margin: 0 0 7px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.photo-empty p {
+  max-width: 245px;
+  margin: 0;
+  color: #8e8e93;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.photo-empty-button {
+  margin-top: 16px;
+}
+
+/* 照片详情 */
+
+.photo-detail-screen {
+  min-height: 0;
+  flex: 1;
+  padding: 0 0 20px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.photo-detail-image {
+  position: relative;
+  width: 100%;
+  height: min(48vh, 390px);
+  min-height: 230px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #e5e5ea;
+}
+
+.photo-detail-image img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #111;
+}
+
+.photo-detail-image .photo-image-fallback {
+  font-size: 42px;
+}
+
+.photo-detail-info {
+  padding: 20px 21px 17px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.photo-detail-info h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  overflow-wrap: anywhere;
+}
+
+.photo-detail-info p {
+  margin: 6px 0 0;
+  color: #8e8e93;
+  font-size: 13px;
+}
+
+.photo-round-action {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 1px solid #e5e5ea;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #007aff;
+  background: #fff;
+  cursor: pointer;
+}
+
+.photo-round-action.is-favorite {
+  border-color: #ffe0e6;
+  color: #ff375f;
+  background: #fff0f3;
+}
+
+.photo-detail-toolbar {
+  margin: 0 20px;
+  padding: 13px 0;
+  border-top: 1px solid #e5e5ea;
+  border-bottom: 1px solid #e5e5ea;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.photo-toolbar-button {
+  padding: 5px 0;
+  border: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #007aff;
+  background: transparent;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.photo-delete-action {
+  color: #ff3b30;
+}
+
+.photo-detail-bottom {
+  padding: 20px;
+}
+
+.photo-detail-bottom .photo-secondary-button {
+  width: 100%;
+}
+
+/* 添加照片表单 */
+
+.photo-form-screen {
+  padding: 10px 20px 24px;
+  background: #f2f2f7;
+}
+
+.photo-add-form {
+  padding-bottom: 20px;
+}
+
+.photo-form-intro {
+  padding: 17px 8px 23px;
+  text-align: center;
+}
+
+.photo-form-icon {
+  width: 66px;
+  height: 66px;
+  margin: 0 auto 13px;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  color: #007aff;
+  background: #fff;
+  box-shadow: 0 2px 9px rgba(0, 0, 0, 0.04);
+}
+
+.photo-form-intro h3 {
+  margin: 0;
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.photo-form-intro p {
+  margin: 7px 0 0;
+  color: #8e8e93;
+  font-size: 13px;
+}
+
+.photo-form-group {
+  padding: 7px 15px 12px;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.photo-form-group label {
+  margin-top: 8px;
+  display: block;
+  color: #636366;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.photo-form-group input {
+  width: 100%;
+  min-height: 43px;
+  padding: 9px 0;
+  border: 0;
+  border-bottom: 1px solid #e5e5ea;
+  border-radius: 0;
+  color: #1c1c1e;
+  background: transparent;
+  font-size: 14px;
+  outline: none;
+}
+
+.photo-form-group input:last-child {
+  border-bottom: 0;
+}
+
+.photo-form-group input::placeholder {
+  color: #aeaeb2;
+}
+
+.photo-primary-button {
+  width: 100%;
+  min-height: 45px;
+  margin-top: 17px;
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 13px;
+  color: #fff;
+  background: #007aff;
+  font-size: 15px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.photo-form-separator {
+  margin: 16px 0 11px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #8e8e93;
+  font-size: 12px;
+}
+
+.photo-form-separator::before,
+.photo-form-separator::after {
+  height: 1px;
+  flex: 1;
+  content: '';
+  background: #d1d1d6;
+}
+
+.photo-form-separator span {
+  flex: 0 0 auto;
+}
+
+.photo-secondary-button {
+  min-height: 42px;
+  padding: 10px 14px;
+  border: 1px solid #d1d1d6;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #007aff;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.photo-form-screen > .photo-add-form > .photo-secondary-button {
+  width: 100%;
+}
+
+.photo-footnote {
+  margin: 14px 2px 0;
+  color: #8e8e93;
+  font-size: 11px;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.photo-form-error {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: #c62828;
+  background: #ffe9e9;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* 删除确认弹窗 */
+
+.photo-confirm-backdrop {
+  position: absolute;
+  z-index: 8;
+  inset: 0;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.28);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+.photo-confirm {
+  width: 100%;
+  max-width: 300px;
+  padding: 23px 19px 14px;
+  border-radius: 20px;
+  text-align: center;
+  background: rgba(250, 250, 252, 0.98);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+}
+
+.photo-confirm h3 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.photo-confirm p {
+  margin: 0 0 10px;
+  color: #636366;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.photo-confirm-actions {
+  margin-top: 17px;
+  border-top: 1px solid #d1d1d6;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.photo-confirm-actions button {
+  min-height: 43px;
+  border: 0;
+  background: transparent;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.photo-confirm-cancel {
+  border-right: 1px solid #d1d1d6 !important;
+  color: #007aff;
+}
+
+.photo-confirm-delete {
+  color: #ff3b30;
+  font-weight: 650;
+}
+
+/* 小屏幕适配 */
+
+@media (max-width: 390px) {
+  .phone {
+    border-width: 5px;
+    border-radius: 45px;
+  }
+
+  .wallpaper,
+  .app-overlay {
+    border-radius: 39px;
+  }
+
+  .app-grid {
+    left: 12px;
+    right: 12px;
+    column-gap: 5px;
+  }
+
+  .app-icon {
+    width: 53px;
+    height: 53px;
+    border-radius: 13px;
+  }
+
+  .dock-icon .app-icon {
+    width: 49px;
+    height: 49px;
+  }
+
+  .home-date-block {
+    left: 24px;
+  }
+
+  .home-date-block h1 {
+    font-size: 46px;
+  }
+
+  .photo-header {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .photo-title-row h2 {
+    font-size: 31px;
+  }
+}
+
+@media (max-height: 720px) {
+  .stage {
+    padding: 8px;
+  }
+
+  .phone {
+    height: calc(100vh - 16px);
+    min-height: 580px;
+  }
+
+  .home-date-block {
+    top: 76px;
+  }
+
+  .app-grid {
+    top: 178px;
+    row-gap: 13px;
+  }
+
+  .home-widget {
+    bottom: 132px;
+    min-height: 103px;
+  }
+
+  .dock {
+    bottom: 27px;
+    min-height: 70px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+/* iPhone 17 Pro 手机外框：统一尺寸与纵横比例 */
+.phone {
+  position: relative;
+  width: min(402px, calc((100vh - 32px) * 402 / 874), calc(100vw - 24px));
+  height: min(874px, calc(100vh - 32px), calc((100vw - 24px) * 874 / 402));
+  min-height: 0;
+  flex-shrink: 0;
+  border: 7px solid #171719;
+  border-radius: 56px;
+  background: #111;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6),
+    0 28px 70px rgba(20, 25, 35, 0.28), 0 8px 18px rgba(20, 25, 35, 0.15);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* 手机屏幕与外框保持一致 */
+.wallpaper,
+.app-overlay {
+  border-radius: 48px;
+}
+
+/* 小屏幕预览时等比例缩小，不拉宽 */
+@media (max-width: 430px) {
+  .stage {
+    padding: 8px;
+  }
+
+  .phone {
+    width: min(402px, calc(100vw - 16px), calc((100vh - 16px) * 402 / 874));
+    height: min(874px, calc(100vh - 16px), calc((100vw - 16px) * 874 / 402));
+    border-width: 5px;
+    border-radius: 45px;
+  }
+
+  .wallpaper,
+  .app-overlay {
+    border-radius: 39px;
+  }
+}
+
+/* 屏幕较矮时依然保持比例 */
+@media (max-height: 720px) {
+  .phone {
+    width: min(402px, calc((100vh - 16px) * 402 / 874), calc(100vw - 16px));
+    height: min(874px, calc(100vh - 16px), calc((100vw - 16px) * 874 / 402));
+    min-height: 0;
+  }
+}
+
+/* ===== iPhone 桌面视觉升级 ===== */
+
+.phone {
+  width: min(402px, calc((100vh - 32px) * 402 / 874), calc(100vw - 24px));
+  height: auto;
+  aspect-ratio: 402 / 874;
+  min-height: 0;
+  flex-shrink: 0;
+  border: 6px solid #242426;
+  border-radius: 55px;
+  background: #111;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 30px 80px rgba(20, 25, 35, 0.28), 0 8px 22px rgba(20, 25, 35, 0.15);
+}
+
+.wallpaper,
+.app-overlay {
+  border-radius: 48px;
+}
+
+.wallpaper {
+  background-image: linear-gradient(
+      180deg,
+      rgba(5, 12, 24, 0.08),
+      transparent 38%,
+      rgba(5, 12, 24, 0.14)
+    ),
+    url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1200&q=90');
+  background-position: center;
+  background-size: cover;
+}
+
+.status-bar {
+  height: 55px;
+  padding: 13px 25px 0;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.25px;
+}
+
+.island {
+  top: 9px;
+  width: 126px;
+  height: 36px;
+  border-radius: 22px;
+  background: #000;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035),
+    0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+.island-camera {
+  top: 11px;
+  right: 14px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #101723;
+  background: radial-gradient(circle at 35% 35%, #365273, #080b11 72%);
+  box-shadow: inset 0 0 2px rgba(95, 155, 255, 0.3);
+}
+
+.status-icons {
+  width: 49px;
+}
+
+.home-date-block {
+  top: 87px;
+  left: 27px;
+}
+
+.home-weekday {
+  margin-bottom: 2px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.home-date-block h1 {
+  font-size: 50px;
+  font-weight: 300;
+  letter-spacing: -2.3px;
+  line-height: 1.1;
+}
+
+.app-grid {
+  top: 207px;
+  left: 17px;
+  right: 17px;
+  column-gap: 8px;
+  row-gap: 22px;
+}
+
+.app-item {
+  gap: 7px;
+}
+
+.app-icon {
+  width: 57px;
+  height: 57px;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12),
+    inset 0 0.7px 0 rgba(255, 255, 255, 0.48),
+    inset 0 0 0 0.6px rgba(255, 255, 255, 0.22);
+  transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 160ms ease;
+}
+
+.app-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.app-item:active .app-icon,
+.dock-icon:active .app-icon {
+  transform: scale(0.9);
+  filter: brightness(0.94);
+}
+
+.app-name {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: -0.1px;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.52);
+}
+
+.home-widget {
+  bottom: 151px;
+  min-height: 116px;
+  padding: 15px 16px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 23px;
+  background: rgba(35, 43, 54, 0.28);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(26px) saturate(155%);
+  backdrop-filter: blur(26px) saturate(155%);
+}
+
+.widget-topline {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+}
+
+.widget-main {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.15px;
+}
+
+.widget-note {
+  font-size: 12px;
+  letter-spacing: 0.1px;
+}
+
+.dock {
+  right: 12px;
+  bottom: 31px;
+  left: 12px;
+  min-height: 83px;
+  padding: 12px 10px;
+  gap: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  border-radius: 29px;
+  background: rgba(245, 247, 250, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 4px 18px rgba(0, 0, 0, 0.08);
+  -webkit-backdrop-filter: blur(28px) saturate(165%);
+  backdrop-filter: blur(28px) saturate(165%);
+}
+
+.dock-icon .app-icon {
+  width: 55px;
+  height: 55px;
+  border-radius: 15px;
+}
+
+.home-indicator {
+  bottom: 8px;
+  width: 135px;
+  height: 5px;
+  border-radius: 99px;
+}
+
+.app-overlay {
+  background: #fff;
+}
+
+@media (max-width: 430px) {
+  .stage {
+    padding: 8px;
+  }
+
+  .phone {
+    width: min(402px, calc(100vw - 16px), calc((100vh - 16px) * 402 / 874));
+    height: auto;
+    aspect-ratio: 402 / 874;
+    border-width: 5px;
+    border-radius: 45px;
+  }
+
+  .wallpaper,
+  .app-overlay {
+    border-radius: 39px;
+  }
+
+  .app-grid {
+    left: 12px;
+    right: 12px;
+    column-gap: 5px;
+  }
+
+  .app-icon {
+    width: 53px;
+    height: 53px;
+    border-radius: 14px;
+  }
+
+  .dock-icon .app-icon {
+    width: 49px;
+    height: 49px;
+  }
+}
+
+@media (max-height: 720px) {
+  .phone {
+    width: min(402px, calc((100vh - 16px) * 402 / 874), calc(100vw - 16px));
+    height: auto;
+    aspect-ratio: 402 / 874;
+    min-height: 0;
+  }
+
+  .home-date-block {
+    top: 76px;
+  }
+
+  .app-grid {
+    top: 178px;
+    row-gap: 13px;
+  }
+
+  .home-widget {
+    bottom: 132px;
+    min-height: 103px;
+  }
+
+  .dock {
+    bottom: 27px;
+    min-height: 70px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+/* 修复桌面壁纸：图片加载失败时也有完整背景 */
+.wallpaper {
+  background-color: #71869b !important;
+  background-image: linear-gradient(
+      180deg,
+      rgba(8, 18, 34, 0.06) 0%,
+      rgba(8, 18, 34, 0.02) 45%,
+      rgba(8, 18, 34, 0.28) 100%
+    ),
+    url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1200&q=90') !important;
+  background-position: center, center;
+  background-size: cover, cover;
+  background-repeat: no-repeat;
+}
+
+/* iMessage 左右气泡布局：仅影响信息 App */
+
+.messages-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  background: #fff;
+  color: #111;
+}
+
+.messages-app .messages-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 54px;
+  padding: 0 12px;
+  background: #fff;
+}
+
+.messages-app .messages-header h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 650;
+}
+
+.messages-app .messages-back {
+  justify-self: start;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: #007aff;
+  font-size: 14px;
+}
+
+.messages-app .messages-action {
+  justify-self: end;
+  color: #007aff;
+  font-size: 12px;
+}
+
+.messages-app .chat-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-left: 14px;
+  background: #fff;
+}
+
+.messages-app .messages-search {
+  margin: 8px 14px 12px 0;
+  padding: 9px 12px;
+  border-radius: 10px;
+  background: #f1f1f6;
+  color: #8e8e93;
+  font-size: 13px;
+}
+
+.messages-app .chat-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  min-height: 72px;
+  padding: 8px 14px 8px 0;
+  border: 0;
+  border-bottom: 1px solid #e8e8ed;
+  background: #fff;
+  text-align: left;
+}
+
+.messages-app .chat-avatar {
+  display: grid;
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 50%;
+  background: #e7edf7;
+  font-size: 24px;
+}
+
+.messages-app .chat-info {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.messages-app .chat-name {
+  color: #111;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.messages-app .chat-preview {
+  overflow: hidden;
+  color: #8e8e93;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.messages-app .chat-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  color: #8e8e93;
+  font-size: 10px;
+}
+
+.messages-app .chat-chevron {
+  font-size: 20px;
+}
+
+.messages-app .conversation {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fff;
+}
+
+.messages-app .conversation-history {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+  padding: 12px 10px 16px;
+  background: #fff;
+}
+
+.messages-app .conversation-date {
+  margin: 5px 0 15px;
+  color: #8e8e93;
+  text-align: center;
+  font-size: 10px;
+}
+
+.messages-app .message-line {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 3px;
+  margin: 2px 0;
+}
+
+.messages-app .message-line.mine {
+  align-items: flex-end;
+}
+
+.messages-app .message-line.theirs {
+  align-items: flex-start;
+}
+
+.messages-app .message-bubble {
+  width: fit-content;
+  max-width: 78%;
+  padding: 9px 12px;
+  border-radius: 18px;
+  font-size: 13px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.messages-app .message-line.mine .message-bubble {
+  border-bottom-right-radius: 5px;
+  background: #007aff;
+  color: #fff;
+}
+
+.messages-app .message-line.theirs .message-bubble {
+  border-bottom-left-radius: 5px;
+  background: #e9e9eb;
+  color: #111;
+}
+
+.messages-app .message-time {
+  padding: 0 5px;
+  color: #a0a0a5;
+  font-size: 9px;
+}
+
+.messages-app .message-composer {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+  border-top: 1px solid #eeeef2;
+  background: #fafafa;
+}
+
+.messages-app .message-composer input {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+  height: 36px;
+  padding: 0 13px;
+  border: 1px solid #d5d5db;
+  border-radius: 20px;
+  outline: none;
+  background: #fff;
+  color: #111;
+  font-size: 13px;
+}
+
+.messages-app .message-composer input:focus {
+  border-color: #9fc8ff;
+}
+
+.messages-app .message-composer button {
+  display: grid;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #007aff;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.messages-app .message-composer button:disabled {
+  opacity: 0.35;
+}
+/* =========================================
+   TREASURE 私聊界面 · KakaoTalk 视觉升级
+   仅作用于消息 App，不影响其他页面
+   ========================================= */
+
+.messages-app {
+  background: #bacee0;
+  color: #191919;
+  font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',
+    'Malgun Gothic', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* 顶部导航 */
+.messages-app .conversation-header {
+  min-height: 58px;
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.055);
+  background: rgba(255, 255, 255, 0.97);
+}
+
+.messages-app .conversation-header button {
+  color: #292929;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.messages-app .conversation-header strong,
+.messages-app .conversation-header h2 {
+  color: #191919;
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.25px;
+}
+
+/* 聊天记录区域 */
+.messages-app .conversation-history,
+.messages-app .conversation-messages,
+.messages-app .message-list {
+  min-height: 0;
+  flex: 1;
+  gap: 0;
+  padding: 15px 12px 18px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #bacee0;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+.messages-app .conversation-history::-webkit-scrollbar,
+.messages-app .conversation-messages::-webkit-scrollbar,
+.messages-app .message-list::-webkit-scrollbar {
+  display: none;
+}
+
+/* 日期分隔 */
+.messages-app .conversation-date {
+  width: fit-content;
+  max-width: 90%;
+  margin: 5px auto 19px;
+  padding: 6px 11px;
+  border-radius: 14px;
+  background: rgba(80, 101, 120, 0.23);
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* 每条消息的排列 */
+.messages-app .message-line {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+}
+
+.messages-app .message-line.mine {
+  align-items: flex-end;
+}
+
+.messages-app .message-line.theirs {
+  align-items: flex-start;
+}
+
+/* 成员头像、昵称：保留组件已有的显示逻辑 */
+.messages-app .message-sender,
+.messages-app .message-nickname {
+  margin: 0 0 3px 4px;
+  color: #394957;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* 气泡基础样式 */
+.messages-app .message-bubble {
+  display: block;
+  width: fit-content;
+  max-width: 78%;
+  min-width: 0;
+  padding: 8px 11px;
+  border: 0;
+  border-radius: 15px;
+  color: #191919;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  box-shadow: 0 1px 1px rgba(35, 53, 67, 0.035);
+}
+
+/* 自己发送：KakaoTalk 黄色 */
+.messages-app .message-line.mine .message-bubble,
+.messages-app .message-bubble.sent,
+.messages-app .message-bubble.outgoing,
+.messages-app .message-bubble.is-mine {
+  align-self: flex-end;
+  border-radius: 15px 4px 15px 15px;
+  background: #fee500;
+  color: #191919;
+}
+
+/* 成员回复：白色 */
+.messages-app .message-line.theirs .message-bubble,
+.messages-app .message-bubble.received,
+.messages-app .message-bubble.incoming {
+  align-self: flex-start;
+  border-radius: 4px 15px 15px 15px;
+  background: #fff;
+  color: #191919;
+}
+
+/* 连续消息之间更紧凑 */
+.messages-app .message-line + .message-line {
+  margin-top: 7px;
+}
+
+.messages-app .message-line.mine + .message-line.mine,
+.messages-app .message-line.theirs + .message-line.theirs {
+  margin-top: 3px;
+}
+
+/* 消息时间 */
+.messages-app .message-time {
+  padding: 0 4px;
+  color: rgba(45, 62, 76, 0.72);
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+/* 输入栏 */
+.messages-app .message-composer {
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 11px max(10px, env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(0, 0, 0, 0.055);
+  background: #f7f7f7;
+}
+
+.messages-app .message-composer input,
+.messages-app .message-composer textarea {
+  min-width: 0;
+  min-height: 38px;
+  padding: 9px 14px;
+  border: 1px solid #e2e2e2;
+  border-radius: 20px;
+  background: #fff;
+  color: #191919;
+  font-size: 13px;
+  line-height: 1.4;
+  outline: none;
+}
+
+.messages-app .message-composer input:focus,
+.messages-app .message-composer textarea:focus {
+  border-color: #d0d0d0;
+  box-shadow: 0 0 0 2px rgba(254, 229, 0, 0.15);
+}
+
+/* 黄色发送按钮 */
+.messages-app .message-composer button {
+  display: grid;
+  flex: 0 0 35px;
+  width: 35px;
+  height: 35px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #fee500;
+  color: #242424;
+  font-size: 18px;
+  font-weight: 650;
+  transition: transform 120ms ease;
+}
+
+.messages-app .message-composer button:active {
+  transform: scale(0.93);
+}
+
+.messages-app .message-composer button:disabled {
+  background: #e5e5e5;
+  color: #999;
+  opacity: 1;
+}
+
+/* 小屏幕适配 */
+@media (max-width: 390px) {
+  .messages-app .conversation-history,
+  .messages-app .conversation-messages,
+  .messages-app .message-list {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .messages-app .message-bubble {
+    max-width: 82%;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
+
+/* =====================================
+   iPhone 桌面视觉优化 · 第 1 步
+   只调整外观，不修改应用逻辑
+   ===================================== */
+
+/* 手机外框：更接近真实 iPhone 的金属边框 */
+.phone {
+  border-color: #242426;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.82),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 30px 80px rgba(20, 25, 35, 0.3),
+    0 8px 22px rgba(20, 25, 35, 0.13);
+}
+
+/* 桌面图标：统一圆角、边缘与立体感 */
+.app-icon {
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.13),
+    inset 0 0.7px 0 rgba(255, 255, 255, 0.42),
+    inset 0 0 0 0.6px rgba(255, 255, 255, 0.2);
+  -webkit-user-select: none;
+  user-select: none;
+  transition: transform 160ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 160ms ease;
+}
+
+/* 桌面图标点击反馈 */
+.app-item:active .app-icon,
+.dock-icon:active .app-icon {
+  transform: scale(0.91);
+  filter: brightness(0.94);
+}
+
+/* 桌面 App 名称 */
+.app-name {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: -0.1px;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* 底部 Dock：更自然的磨砂玻璃效果 */
+.dock {
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  background: rgba(245, 247, 250, 0.32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 5px 20px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(28px) saturate(165%);
+  backdrop-filter: blur(28px) saturate(165%);
+}
+
+/* Dock 图标与桌面保持统一 */
+.dock-icon .app-icon {
+  border-radius: 15px;
+}
+
+/* 桌面按钮去除浏览器默认外观 */
+.app-item,
+.dock-icon {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 鼠标悬停时轻微提亮，不影响触屏操作 */
+@media (hover: hover) {
+  .app-item:hover .app-icon,
+  .dock-icon:hover .app-icon {
+    filter: brightness(1.04);
+  }
+}
